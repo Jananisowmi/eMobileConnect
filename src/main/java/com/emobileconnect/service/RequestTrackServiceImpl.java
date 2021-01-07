@@ -9,7 +9,7 @@ import com.emobileconnect.dto.TrackResponsedto;
 import com.emobileconnect.entity.RequestTrack;
 import com.emobileconnect.exception.TrackRecordNotFoundException;
 import com.emobileconnect.repository.RequestTrackRepository;
-import com.emobileconnect.utils.Constants;
+import com.emobileconnect.utils.MobileConnectionConstants;
 
 /**
  * Get the Request track status - business logic
@@ -31,13 +31,13 @@ public class RequestTrackServiceImpl implements RequestTrackService {
 		RequestTrack track = requestTrackRepository.findByTrackId(trackId);
 
 		if (!Optional.ofNullable(track).isPresent()) {
-			throw new TrackRecordNotFoundException(Constants.TRACK_NOT_FOUND);
+			throw new TrackRecordNotFoundException(MobileConnectionConstants.TRACK_NOT_FOUND);
 		}
 
 		response.setTrackStatus(track.getTrackStatus());
 		response.setAdminComments(track.getAdminComments());
-		response.setMessage(Constants.SUCCESS_MESSAGE);
-		response.setStatusCode(Constants.OK_STATUS);
+		response.setMessage(MobileConnectionConstants.SUCCESS_MESSAGE);
+		response.setStatusCode(MobileConnectionConstants.OK_STATUS);
 		return response;
 
 	}

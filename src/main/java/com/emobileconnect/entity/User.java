@@ -26,8 +26,8 @@ public class User {
 	private String address;
 	private String state;
 	private String emailId;
-	private String aadharNumber;
-	private Integer mobileId;
+	private Long aadharNumber;
+	private Long mobileNumber;
 	
 
 }
