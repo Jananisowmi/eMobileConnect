@@ -11,21 +11,29 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * * The RequestTrack class is a pojo class that has 6 fields related to request
+ * tracking for users
+ * 
+ * @author Janani
+ * @since 2021-01-07
+ *
+ */
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="request_track")
+@Table(name = "request_track")
 public class RequestTrack {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer trackId;
 	private String trackStatus;
 	private Integer userId;
 	private Integer talktimePlanId;
 	private Integer adminId;
-	private String  adminComments;
+	private String adminComments;
 
 }
