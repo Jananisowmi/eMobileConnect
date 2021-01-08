@@ -26,32 +26,27 @@ public class AdminServiceImpl implements AdminService {
 	public Optional<ResponseDto> updateRequestStatus(Integer requestId, RequestStatusUpdateDto requestStatusUpdateDto)
 			throws CommonException {
 
-		if (!adminRepository.findById(requestStatusUpdateDto.getAdminId()).isPresent()) {
-			throw new CommonException("Invalid admin credentials");
-		}
-
-		Optional<RequestTrack> request = requestTrackRepository.findById(requestId);
-
-		if (!request.isPresent()) {
-			throw new CommonException("Invalid requestId credentials");
-		}
+		adminRepository.findById(requestStatusUpdateDto.getAdminId())
+				.orElseThrow(() -> new CommonException("Invalid Admin Credentials"));
 
 		try {
 			ConnectionStatusEnum.valueOf(requestStatusUpdateDto.getStatus());
 		} catch (Exception e) {
 			throw new CommonException("Invalid Status");
 		}
-		
-		request.get().setAdminComments(requestStatusUpdateDto.getAdminComments());
-		request.get().setAdminId(requestStatusUpdateDto.getAdminId());
-		request.get().setTrackStatus(requestStatusUpdateDto.getStatus());
-		
-		requestTrackRepository.save(request.get());
-		
-		ResponseDto responseDto = new ResponseDto();
-		responseDto.setMessage("connection approved successfully");
-		responseDto.setStatusCode("200");
-		return Optional.of(responseDto);
+
+		return requestTrackRepository.findById(requestId).map(request -> {
+
+			request.setAdminComments(requestStatusUpdateDto.getAdminComments());
+			request.setAdminId(requestStatusUpdateDto.getAdminId());
+			request.setTrackStatus(requestStatusUpdateDto.getStatus());
+
+			requestTrackRepository.save(request);
+
+			return Optional.ofNullable(
+					ResponseDto.builder().message("Connection Approved Successfully").statusCode("200").build());
+		}).orElseThrow(() -> new CommonException("Invalid Request Id"));
+
 	}
 
 }
