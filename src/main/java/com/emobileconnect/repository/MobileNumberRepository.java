@@ -12,11 +12,11 @@ import org.springframework.stereotype.Repository;
 import com.emobileconnect.entity.MobileNumber;
 
 @Repository
-public interface MobileNumberRepository extends JpaRepository<MobileNumber, Integer>{
-	
+public interface MobileNumberRepository extends JpaRepository<MobileNumber, Integer> {
+
 	@Query("SELECT m.mobileNumber from MobileNumber m WHERE m.mobileStatus='available' and m.mobileNumber = :mobileNumber")
 	public Optional<MobileNumber> findByMobileNumber(Long mobileNumber);
-	
+
 	@Transactional
 	@Modifying
 	@Query("UPDATE MobileNumber m SET m.mobileStatus='registered' WHERE  m.mobileNumber = :mobileNumber")

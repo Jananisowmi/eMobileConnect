@@ -16,11 +16,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="user")
+@Table(name = "user")
 public class User {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer userId;
 	private String userName;
 	private String address;
@@ -28,6 +28,5 @@ public class User {
 	private String emailId;
 	private Long aadharNumber;
 	private Long mobileNumber;
-	
 
 }

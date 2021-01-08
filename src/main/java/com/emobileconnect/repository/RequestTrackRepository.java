@@ -10,6 +10,4 @@ public interface RequestTrackRepository extends JpaRepository<RequestTrack, Inte
 
 	public RequestTrack findByTrackId(Integer trackId);
 
-	
-
 }

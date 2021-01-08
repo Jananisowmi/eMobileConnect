@@ -6,5 +6,5 @@ import com.emobileconnect.exception.UserRegistrationException;
 
 public interface UserService {
 
-	UserRegistrationResponseDto register (UserRegistrationRequestDto userRequestDto) throws UserRegistrationException;
+	UserRegistrationResponseDto register(UserRegistrationRequestDto userRequestDto) throws UserRegistrationException;
 }

@@ -9,5 +9,6 @@ import com.emobileconnect.entity.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
 	User findByEmailId(String emailId);
+
 	User findByAadharNumber(Long aadharNumber);
 }
