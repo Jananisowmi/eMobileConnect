@@ -2,9 +2,12 @@ package com.emobileconnect.service;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.emobileconnect.controller.RequestTrackController;
 import com.emobileconnect.dto.TrackResponsedto;
 import com.emobileconnect.entity.RequestTrack;
 import com.emobileconnect.exception.TrackRecordNotFoundException;
@@ -25,8 +28,11 @@ public class RequestTrackServiceImpl implements RequestTrackService {
 	@Autowired
 	RequestTrackRepository requestTrackRepository;
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(RequestTrackServiceImpl.class);
+
 	@Override
-	public TrackResponsedto getTrackstatus(Integer trackId) {
+	public TrackResponsedto getTrackstatus(Integer trackId) throws TrackRecordNotFoundException {
+		LOGGER.info("Getting the track status for trackID " + trackId);
 		TrackResponsedto response = new TrackResponsedto();
 		RequestTrack track = requestTrackRepository.findByTrackId(trackId);
 
