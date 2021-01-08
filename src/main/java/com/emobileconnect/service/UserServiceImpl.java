@@ -86,10 +86,11 @@ public class UserServiceImpl implements UserService {
 			throw new UserRegistrationException(MobileConnectionConstants.NO_MOBILE_NUMBER_EXISTS);
 		}
 				
+		mobileNumberRepository.updateMobileNumberStatus(userRequestDto.getMobileNumber());
+		
 		User user = new User();
 		BeanUtils.copyProperties(userRequestDto, user);
 		User userResponse = userRepository.save(user);
-		
 		
 		RequestTrack requestTrack = new RequestTrack();
 		requestTrack.setTrackStatus("Registration Initiated");
