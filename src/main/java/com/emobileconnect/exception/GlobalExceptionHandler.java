@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
 import com.emobileconnect.utils.MobileConnectionConstants;
 
 /**
@@ -26,12 +27,23 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(errorDetails, status);
 
 	}
-	
+
 	@ExceptionHandler(UserRegistrationException.class)
-	public final ResponseEntity<ErrorDetails> userRegistrationException(UserRegistrationException ex, WebRequest request) {
+	public final ResponseEntity<ErrorDetails> userRegistrationException(UserRegistrationException ex,
+			WebRequest request) {
 		ErrorDetails errorDetails = new ErrorDetails(ex.getMessage(), MobileConnectionConstants.NOT_FOUND_STATUS,
 				request.getDescription(false));
 		return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+
+	}
+
+	@ExceptionHandler(RequestTrackException.class)
+	public final ResponseEntity<ErrorDetails> commonException(Exception ex, WebRequest request) {
+
+		ErrorDetails errorDetails = new ErrorDetails(ex.getMessage(), MobileConnectionConstants.NOT_FOUND_STATUS,
+				request.getDescription(false));
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		return new ResponseEntity<>(errorDetails, status);
 
 	}
 
