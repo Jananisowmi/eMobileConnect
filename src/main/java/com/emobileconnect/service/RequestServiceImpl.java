@@ -24,14 +24,10 @@ public class RequestServiceImpl implements RequestService{
 	@Override
 	public List<AdminRequestTrackDto> getAllRequest() {
 		
-		List<RequestTrack> requestTrackList = new ArrayList<>();
+		List<RequestTrack> requestTrackList;
 		requestTrackList = requestTrackRepository.findAll();
-		
 		List<AdminRequestTrackDto> adminRequestList = new ArrayList<>();
-		
-		requestTrackList.forEach(request -> adminRequestList.add(modelMapper.map(request, AdminRequestTrackDto.class)));
-		
-		requestTrackList.forEach(System.out::print);
+		requestTrackList.forEach(request -> adminRequestList.add(modelMapper.map(request, AdminRequestTrackDto.class)));		
 		return adminRequestList;
 	}
 	

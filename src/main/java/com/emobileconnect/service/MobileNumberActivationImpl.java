@@ -18,4 +18,5 @@ public class MobileNumberActivationImpl implements MobileNumberActivation{
 		
 		mobileNumberRepository.updateConnection();
 	}
+
 }
