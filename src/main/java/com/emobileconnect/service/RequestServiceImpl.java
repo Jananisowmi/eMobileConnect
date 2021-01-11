@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 
 import com.emobileconnect.dto.AdminRequestTrackDto;
 import com.emobileconnect.entity.RequestTrack;
-import com.emobileconnect.exception.RequestsNotFoundException;
+import com.emobileconnect.exception.RequestTrackException;
 import com.emobileconnect.repository.RequestTrackRepository;
-import com.emobileconnect.util.MobileConnectionConstants;
+import com.emobileconnect.utils.MobileConnectionConstants;
 
 @Service
 public class RequestServiceImpl implements RequestService{
@@ -30,11 +30,11 @@ public class RequestServiceImpl implements RequestService{
 	/**
 	 * Method to get all the user registration requests by admin
 	 *
-	 * @throws RequestsNotFoundException thrown when there are no user requests
+	 * @throws RequestTrackException thrown when there are no user requests
 	 * @return adminRequestList which has list of all the user requests
 	 */
 	@Override
-	public List<AdminRequestTrackDto> getAllRequest() throws RequestsNotFoundException {
+	public List<AdminRequestTrackDto> getAllRequest() throws RequestTrackException {
 		
 		LOGGER.info("Getting all requests for Admin");
 		
@@ -42,7 +42,7 @@ public class RequestServiceImpl implements RequestService{
 		requestTrackList = requestTrackRepository.findAll();
 		
 		if(requestTrackList.isEmpty())
-			throw new RequestsNotFoundException(MobileConnectionConstants.REQUESTS_NOT_FOUND);
+			throw new RequestTrackException(MobileConnectionConstants.REQUESTS_NOT_FOUND);
 		
 		List<AdminRequestTrackDto> adminRequestList = new ArrayList<>();
 		requestTrackList.forEach(request -> adminRequestList.add(modelMapper.map(request, AdminRequestTrackDto.class)));		

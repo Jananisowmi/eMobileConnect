@@ -20,6 +20,7 @@ import com.emobileconnect.repository.MobileNumberRepository;
 import com.emobileconnect.repository.RequestTrackRepository;
 import com.emobileconnect.repository.TalktimePlanRepository;
 import com.emobileconnect.repository.UserRepository;
+import com.emobileconnect.utils.ConnectionStatusEnum;
 import com.emobileconnect.utils.MobileConnectionConstants;
 import com.emobileconnect.utils.Validator;
 
@@ -100,10 +101,9 @@ public class UserServiceImpl implements UserService {
 		User userResponse = userRepository.save(user);
 
 		RequestTrack requestTrack = new RequestTrack();
-		requestTrack.setTrackStatus("Registration Initiated");
+		requestTrack.setTrackStatus(ConnectionStatusEnum.INPROGRESS.name());
 		requestTrack.setUserId(userResponse.getUserId());
 		requestTrack.setTalktimePlanId(userRequestDto.getPlanId());
-		requestTrack.setAdminComments("Review pending");
 		RequestTrack trackOrder = requestTrackRepository.save(requestTrack);
 
 		UserRegistrationResponseDto userResponseDto = new UserRegistrationResponseDto();

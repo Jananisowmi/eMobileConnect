@@ -14,10 +14,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.modelmapper.ModelMapper;
 import com.emobileconnect.dto.AdminRequestTrackDto;
 import com.emobileconnect.entity.RequestTrack;
+import com.emobileconnect.exception.RequestTrackException;
 import com.emobileconnect.exception.RequestsNotFoundException;
 import com.emobileconnect.repository.RequestTrackRepository;
 
-@RunWith(MockitoJUnitRunner.class) 
+@RunWith(MockitoJUnitRunner.class)
 public class RequestServiceImplTest {
 
 	@Mock
@@ -25,11 +26,11 @@ public class RequestServiceImplTest {
 
 	@Mock
 	RequestTrackRepository requestTrackRepo;
-	
+
 	@InjectMocks
 	RequestServiceImpl requestServiceImpl;
 
-	AdminRequestTrackDto requestDto ;
+	AdminRequestTrackDto requestDto;
 	RequestTrack requestTrack;
 	List<AdminRequestTrackDto> adminRequesDtotList;
 	List<RequestTrack> requesTrack;
@@ -37,24 +38,24 @@ public class RequestServiceImplTest {
 	@Before
 	public void init() {
 
-		requestDto = new AdminRequestTrackDto("validated",12,"approved");
-		requestTrack = new RequestTrack(1,"validated",12,43,23,"approved");
+		requestDto = new AdminRequestTrackDto("validated", 12, "approved");
+		requestTrack = new RequestTrack(1, "validated", 12, 43, 23, "approved");
 
 		requesTrack = new ArrayList<>();
 		requesTrack.add(requestTrack);
 	}
 
 	@Test
-	public void testRequests() throws RequestsNotFoundException {
+	public void testRequests() throws RequestTrackException {
 
-		//WHEN 
+		// WHEN
 		Mockito.when(requestTrackRepo.findAll()).thenReturn(requesTrack);
-		Mockito.when(modelMapper.map(requestTrack,AdminRequestTrackDto.class)).thenReturn(requestDto);
+		Mockito.when(modelMapper.map(requestTrack, AdminRequestTrackDto.class)).thenReturn(requestDto);
 		List<AdminRequestTrackDto> actual = requestServiceImpl.getAllRequest();
-		
-		//THEN
+
+		// THEN
 		assertNotNull(actual);
-		
+
 	}
 
 }

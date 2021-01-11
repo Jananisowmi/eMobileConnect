@@ -22,7 +22,8 @@ public class MobileConnectionConstants {
 	public static final String ADHAR_NUMBER_ALREADY_EXISTS = "Aadhar Number already exists";
 	public static final String EMAIL_ALREADY_EXISTS = "Email already exists";
 	public static final String NO_PLAN_EXISTS = "Plan doesn't exist.Please select the existing plan";
-	public static final String NO_MOBILE_NUMBER_EXISTS = "Mobile Number is already Registered";
+	public static final String NO_MOBILE_NUMBER_EXISTS = "Mobile Number is already Registered/Unavailble";
 	public static final String REGISTRATION_SUCCESS_MESSAGE = "User Registered Successfully.The Request for New Mobile Connection has been initiated";
+	public static final String REQUESTS_NOT_FOUND = "User registration requests not found";
 
 }

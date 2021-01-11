@@ -22,4 +22,12 @@ public interface MobileNumberRepository extends JpaRepository<MobileNumber, Inte
 	@Query("UPDATE MobileNumber m SET m.mobileStatus='registered' WHERE  m.mobileNumber = :mobileNumber")
 	void updateMobileNumberStatus(Long mobileNumber);
 
+	@Transactional
+	@Modifying
+	@Query(value = "UPDATE emobileconnect.mobile_number set mobile_status = 'connection enabled' WHERE mobile_number in\r\n"
+			+ "(SELECT mobile_number FROM(SELECT mobile_number,track_status,a.user_id from emobileconnect.user a inner join \r\n"
+			+ " emobileconnect.request_track b\r\n"
+			+ "on(a.user_id = b.user_id)  where track_status = 'APPROVED') as innerTable) ", nativeQuery = true)
+	void updateConnection();
+
 }
