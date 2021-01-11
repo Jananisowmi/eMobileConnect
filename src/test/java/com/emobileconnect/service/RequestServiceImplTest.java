@@ -1,9 +1,10 @@
 package com.emobileconnect.service;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,10 +13,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.modelmapper.ModelMapper;
+
 import com.emobileconnect.dto.AdminRequestTrackDto;
 import com.emobileconnect.entity.RequestTrack;
-import com.emobileconnect.exception.RequestTrackException;
-import com.emobileconnect.exception.RequestsNotFoundException;
+import com.emobileconnect.exception.TrackRecordNotFoundException;
 import com.emobileconnect.repository.RequestTrackRepository;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -46,7 +47,7 @@ public class RequestServiceImplTest {
 	}
 
 	@Test
-	public void testRequests() throws RequestTrackException {
+	public void testRequests() throws TrackRecordNotFoundException {
 
 		// WHEN
 		Mockito.when(requestTrackRepo.findAll()).thenReturn(requesTrack);

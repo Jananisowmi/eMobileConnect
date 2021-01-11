@@ -8,7 +8,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.emobileconnect.dto.TrackResponsedto;
@@ -19,30 +18,30 @@ import com.emobileconnect.repository.RequestTrackRepository;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class RequestTrackServiceTest {
-	
+
 	@InjectMocks
 	private RequestTrackServiceImpl service;
-	
+
 	@Mock
 	private RequestTrackRepository repository;
-	
+
 	@Test
-	public void getTrackStatusOK() {
+	public void getTrackStatusOK() throws TrackRecordNotFoundException {
 		TrackResponsedto response = getResponse();
-	
+
 		Mockito.when(repository.findByTrackId(Mockito.anyInt())).thenReturn(getTrackResponse());
 		TrackResponsedto actualResponse = service.getTrackstatus(1);
 		assertEquals(response.getTrackStatus(), actualResponse.getTrackStatus());
-		
+
 	}
-	
+
 	@Test(expected = TrackRecordNotFoundException.class)
-	public void getTractStatusException() {
+	public void getTractStatusException() throws TrackRecordNotFoundException {
 		TrackResponsedto response = getResponse();
-		
+
 		Mockito.when(repository.findByTrackId(Mockito.anyInt())).thenReturn(null);
 		TrackResponsedto actualResponse = service.getTrackstatus(1);
-		
+
 	}
 
 	private RequestTrack getTrackResponse() {
@@ -51,9 +50,6 @@ public class RequestTrackServiceTest {
 		trackResponse.setAdminComments("The request has been approved");
 		return trackResponse;
 	}
-	
-	
-	
 
 	private TrackResponsedto getResponse() {
 		TrackResponsedto response = new TrackResponsedto();
@@ -62,7 +58,7 @@ public class RequestTrackServiceTest {
 		response.setAdminComments(trackResponse.getAdminComments());
 		response.setMessage("Success");
 		response.setStatusCode(200L);
-		
+
 		return response;
 	}
 

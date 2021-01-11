@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.emobileconnect.dto.AdminRequestTrackDto;
-import com.emobileconnect.exception.RequestTrackException;
+import com.emobileconnect.exception.TrackRecordNotFoundException;
 import com.emobileconnect.service.RequestService;
 
 @RestController
@@ -23,11 +23,11 @@ public class RequestController {
 	RequestService requestService;
 
 	@GetMapping("/requests")
-	public ResponseEntity<List<AdminRequestTrackDto>> getAllRequests() throws RequestTrackException {
+	public ResponseEntity<List<AdminRequestTrackDto>> getAllRequests() throws TrackRecordNotFoundException {
 
 		LOGGER.info("Inside controller for getting all user requests for admin");
 		List<AdminRequestTrackDto> requestTrackList;
 		requestTrackList = requestService.getAllRequest();
-		return new ResponseEntity<List<AdminRequestTrackDto>>(requestTrackList, HttpStatus.OK);
+		return new ResponseEntity<>(requestTrackList, HttpStatus.OK);
 	}
 }

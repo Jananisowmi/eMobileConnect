@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.emobileconnect.dto.TrackResponsedto;
+import com.emobileconnect.exception.TrackRecordNotFoundException;
 import com.emobileconnect.service.RequestTrackService;
 
 @SpringBootTest
@@ -25,7 +26,7 @@ public class RequestTrackControllerTest {
 	private RequestTrackService service;
 
 	@Test
-	public void getTrackStatusOK() {
+	public void getTrackStatusOK() throws TrackRecordNotFoundException {
 		TrackResponsedto response = new TrackResponsedto();
 		response.setTrackStatus("Approved");
 		response.setAdminComments("The request has been approved ");

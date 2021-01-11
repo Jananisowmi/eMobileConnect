@@ -20,7 +20,7 @@ import com.emobileconnect.utils.MobileConnectionConstants;
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(TrackRecordNotFoundException.class)
-	public final ResponseEntity<ErrorDetails> TrackRecordNotFoundException(Exception ex, WebRequest request) {
+	public final ResponseEntity<ErrorDetails> trackRecordNotFoundException(Exception ex, WebRequest request) {
 		ErrorDetails errorDetails = new ErrorDetails(ex.getMessage(), MobileConnectionConstants.NOT_FOUND_STATUS,
 				request.getDescription(false));
 		HttpStatus status = HttpStatus.NOT_FOUND;
@@ -34,16 +34,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		ErrorDetails errorDetails = new ErrorDetails(ex.getMessage(), MobileConnectionConstants.NOT_FOUND_STATUS,
 				request.getDescription(false));
 		return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
-
-	}
-
-	@ExceptionHandler(RequestTrackException.class)
-	public final ResponseEntity<ErrorDetails> commonException(Exception ex, WebRequest request) {
-
-		ErrorDetails errorDetails = new ErrorDetails(ex.getMessage(), MobileConnectionConstants.NOT_FOUND_STATUS,
-				request.getDescription(false));
-		HttpStatus status = HttpStatus.NOT_FOUND;
-		return new ResponseEntity<>(errorDetails, status);
 
 	}
 

@@ -9,7 +9,7 @@ package com.emobileconnect.exception;
  * @since 2021-01-07
  *
  */
-public class TrackRecordNotFoundException extends RuntimeException {
+public class TrackRecordNotFoundException extends Exception {
 
 	/**
 	 * 

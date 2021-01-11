@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.emobileconnect.dto.TrackResponsedto;
 import com.emobileconnect.exception.TrackRecordNotFoundException;
-import com.emobileconnect.exception.UserRegistrationException;
 import com.emobileconnect.service.RequestTrackService;
 
 /**
@@ -41,10 +40,10 @@ public class RequestTrackController {
 	 */
 
 	@GetMapping("/requests/{requestId}")
-	public ResponseEntity<TrackResponsedto> getTrackstatus(@PathVariable("requestId") Integer trackId) throws TrackRecordNotFoundException {
-		LOGGER.info("The user tracking ID "+trackId);
+	public ResponseEntity<TrackResponsedto> getTrackstatus(@PathVariable("requestId") Integer trackId) throws TrackRecordNotFoundException  {
+		LOGGER.info("The user tracking ID ");
 		TrackResponsedto response = requestTrackService.getTrackstatus(trackId);
-		return new ResponseEntity<TrackResponsedto>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 
 	}
 
